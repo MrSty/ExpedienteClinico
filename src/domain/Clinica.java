@@ -14,8 +14,7 @@ public class Clinica {
 	private Registro m_Registro = new Registro();
 	private Usuario m_Usuario;
         private Paciente p = new Paciente();
-        TPaciente tt = new TPaciente();
-        
+        private TPaciente tt = new TPaciente();
         private TUsuario usu=new TUsuario();
 
 	public Clinica(){
@@ -32,6 +31,37 @@ public class Clinica {
             this.m_Registro.cargarCita();
             this.m_Registro.crearCita(m);
         }
+        public void cargarCita() {
+            this.m_Registro.cargarCita();
+        }
+        public Cita leerCita(){
+            Cita n;
+            this.cargarCita();
+            return n = this.m_Registro.leerCita(1);
+        }
+        public Cita leerCitaActual(){
+            Cita n;
+            return n = this.m_Registro.leerCitaAct();
+        }
+
+         public boolean sigCita(){
+            boolean sig = this.m_Registro.siguienteCita();
+            return sig;
+        }
+        public boolean antCtia(){
+            boolean ant = this.m_Registro.anteriorCita();
+            return ant;
+        }
+        
+        public void modificarCita(Cita m){
+            
+            this.m_Registro.modificarCita(m);
+        }
+        
+        public void eliminarCita(){
+            this.m_Registro.eliminarCita();
+        }
+
         
         public void crearRegistro(Registro m){
             this.m_Registro.cargarRegistro();
@@ -66,9 +96,7 @@ public class Clinica {
             this.m_Registro.eliminarReg();
         }
 
-	public void buscarRegistro(){
-
-	}
+	
         public void cargarRegistro(){
             this.m_Registro.cargarRegistro();
         }
@@ -131,6 +159,8 @@ public class Clinica {
         public void cargarUsuarios(){
             this.usu.cargarDatos();
         }
+
+    
 
         
         

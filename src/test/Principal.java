@@ -440,6 +440,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_bBuscarRegistroMouseExited
 
     private void bBuscarCitaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bBuscarCitaMouseClicked
+        BuscarCita c = new BuscarCita();
+        c.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_bBuscarCitaMouseClicked
 

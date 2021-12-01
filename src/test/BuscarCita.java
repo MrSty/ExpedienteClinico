@@ -5,12 +5,18 @@
  */
 package test;
 
+import domain.Cita;
+import domain.Clinica;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Marcelo
  */
 public class BuscarCita extends javax.swing.JFrame {
 
+    Clinica cln = new Clinica();
+    
     /**
      * Creates new form BuscarCita
      */
@@ -36,10 +42,15 @@ public class BuscarCita extends javax.swing.JFrame {
         bSiguiente = new javax.swing.JButton();
         bModificar = new javax.swing.JButton();
         bVolver = new javax.swing.JButton();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        ftfFecha = new javax.swing.JFormattedTextField();
         bEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI", 0, 32)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 255));
@@ -103,12 +114,12 @@ public class BuscarCita extends javax.swing.JFrame {
         });
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/##")));
+            ftfFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jFormattedTextField1.setText("        /        /  ");
+        ftfFecha.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ftfFecha.setText("        /        /  ");
 
         bEliminar.setBackground(new java.awt.Color(0, 0, 51));
         bEliminar.setForeground(new java.awt.Color(102, 204, 255));
@@ -136,7 +147,7 @@ public class BuscarCita extends javax.swing.JFrame {
                         .addGap(264, 264, 264)
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(ftfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(468, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -168,7 +179,7 @@ public class BuscarCita extends javax.swing.JFrame {
                     .addComponent(bEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(57, 57, 57)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jFormattedTextField1)
+                    .addComponent(ftfFecha)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -205,35 +216,34 @@ public class BuscarCita extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAnteriorActionPerformed
-        Paciente e;
-        boolean ant = this.cln.antPaciente();
+        Cita e;
+        boolean ant = this.cln.antCtia();
         if(ant){
-            e = this.cln.leerPacienteAct();
-            this.mostrarPaciente(e);
+            e = this.cln.leerCitaActual();
+            this.mostrarCita(e);
         }else{
             JOptionPane.showMessageDialog(this, "Ya no hay pacientes para mostrar","Nueva Cita",JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_bAnteriorActionPerformed
 
     private void bSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSiguienteActionPerformed
-        Paciente e;
-        boolean sig = this.cln.sigPaciente();
+        Cita e;
+        boolean sig = this.cln.sigCita();
 
         if(sig){
-            e = this.cln.leerPacienteAct();
-            this.mostrarPaciente(e);
+            e = this.cln.leerCitaActual();
+            this.mostrarCita(e);
         }else{
             JOptionPane.showMessageDialog(this, "Ya no hay pacientes para mostrar","Nueva Cita",JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_bSiguienteActionPerformed
 
     private void bModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bModificarActionPerformed
-        Registro n = new Registro();
-        n.setPac(this.tfPaciente.getText());
-        n.setDiagnostico(this.tfDiagnostico.getText());
-        n.setTratamiento(this.tfTratamiento.getText());
+        Cita n = new Cita();
+        n.setPaciente(this.tfPaciente.getText());
+        n.setFecha(this.ftfFecha.getText());
 
-        cln.crearRegistro(n);
+        this.cln.modificarCita(n);
     }//GEN-LAST:event_bModificarActionPerformed
 
     private void bVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVolverActionPerformed
@@ -241,9 +251,25 @@ public class BuscarCita extends javax.swing.JFrame {
     }//GEN-LAST:event_bVolverActionPerformed
 
     private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
-        // TODO add your handling code here:
+       this.cln.eliminarCita();
+       Cita p = this.cln.leerCita();
+       this.mostrarCita(p);
     }//GEN-LAST:event_bEliminarActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        cln.cargarCita();
+        Cita n = this.cln.leerCitaActual();
+        this.mostrarCita(n);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
+
+    private void mostrarCita(Cita p) {
+        if (p != null) {
+            this.tfPaciente.setText(p.getPaciente());
+            this.ftfFecha.setText(p.getFecha());
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -285,7 +311,7 @@ public class BuscarCita extends javax.swing.JFrame {
     private javax.swing.JButton bModificar;
     private javax.swing.JButton bSiguiente;
     private javax.swing.JButton bVolver;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JFormattedTextField ftfFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

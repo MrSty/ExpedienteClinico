@@ -37,6 +37,38 @@ public class Registro {
             this.n_cita.agregar(m);
             JOptionPane.showMessageDialog(null, "Cita Guardada", "Nueva Cita", JOptionPane.INFORMATION_MESSAGE);
 	}
+        
+        public Cita leerCita(int i){
+            Cita n;
+            n = this.n_cita.leerRegistro(1);
+            return n;
+        }
+        
+        public Cita leerCitaAct(){
+            Cita n;
+            return n = this.n_cita.leerRegistroActual();
+        }
+        
+        public boolean siguienteCita(){
+            boolean sig = this.n_cita.siguiente();
+            return sig;
+        }
+        public boolean anteriorCita(){
+            boolean ant = this.n_cita.anterior();
+            return ant;
+        }
+        
+        public void modificarCita(Cita m){
+            this.n_cita.modificar(m);
+            JOptionPane.showMessageDialog(null, "Registro modificado", "Registro", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        public void eliminarCita(){
+            this.n_cita.eliminar();
+            JOptionPane.showMessageDialog(null, "Registro Eliminado", "Registro", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        
         public void crearRegistro(Registro m){
             this.m_Registro.agregar(m);
             JOptionPane.showMessageDialog(null, "Registro Guardado", "Nuevo Registro", JOptionPane.INFORMATION_MESSAGE);
@@ -99,9 +131,7 @@ public class Registro {
             boolean sig = this.mn.anterior();
             return sig;
         }
-	public void modificarCita(){
-
-	}
+	
 
     public String getDiagnostico() {
         return diagnostico;

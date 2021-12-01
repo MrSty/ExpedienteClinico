@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,6 +44,45 @@ public class TCita {
             Logger.getLogger(TCita.class.getName()).log(Level.SEVERE, null, ex);
         }
     } 
+   public void modificar(Cita e){
+        try {
+            
+            rs.updateString("paciente", e.getPaciente());
+            rs.updateString("fechaCita", e.getFecha());
+            rs.updateRow();
+        } catch (SQLException ex) {
+            Logger.getLogger(TCita.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public Cita leerRegistro(int i){
+         try {
+            Cita c = new Cita();
+            this.rs.absolute(i);
+            c.setPaciente(rs.getString("paciente"));
+            c.setFecha(rs.getString("fechaCita"));
+            
+            return c;
+        } catch (SQLException ex) {
+            Logger.getLogger(TCita.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    public Cita leerRegistroActual(){
+        try {
+            Cita c = new Cita();
+
+            c.setPaciente(rs.getString("paciente"));
+            c.setFecha(rs.getString("fechaCita"));
+            
+            return c;
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(TCita.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
    
    public boolean siguiente(){
         try {
@@ -55,7 +94,7 @@ public class TCita {
             return false;
         }
         } catch (SQLException ex) {
-                Logger.getLogger(TRegistro.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TCita.class.getName()).log(Level.SEVERE, null, ex);
                 return false;
         }
         
@@ -70,7 +109,7 @@ public class TCita {
             return false;
         }
         } catch (SQLException ex) {
-                Logger.getLogger(TRegistro.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TCita.class.getName()).log(Level.SEVERE, null, ex);
                 return false;
         }
     }
@@ -79,7 +118,7 @@ public class TCita {
             rs.deleteRow();
             rs.next();
         } catch (SQLException ex) {
-            Logger.getLogger(TRegistro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TCita.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

@@ -208,10 +208,9 @@ public class BuscarRegistro extends javax.swing.JFrame {
 
     private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
         this.cln.eliminarRegistro();
-        this.cln.sigRegistro();
-        this.tfDiagnostico.setText("");
-        this.tfPaciente.setText("");
-        this.tfTratamiento.setText("");
+        Registro p = this.cln.leerRegistro();
+        this.mostrarRegistro(p);
+        
     }//GEN-LAST:event_bEliminarActionPerformed
 
     private void mostrarRegistro(Registro p) {
