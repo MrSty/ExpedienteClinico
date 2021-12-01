@@ -93,28 +93,21 @@ public class TUsuario {
                 return false;
         }
     }
-    public boolean buscar(Usuario m){
- 
-       boolean found = false;
-       try {
-           this.rs.absolute(1);
-       do{
-           
-           
-               
-               
-               if(this.rs.getString("usuario").compareTo(m.getUsuario()) == 0 && this.rs.getString("clave").compareTo(m.getClave())==0){
-                   found = true;
-               }else if(this.siguiente()) {
-                   
-               }else{
-                   break;
-               }
-           
-       }while(found==false);
-       } catch (SQLException ex) {
-               Logger.getLogger(TUsuario.class.getName()).log(Level.SEVERE, null, ex);
-           }
-       return found;
-    }
+//    public boolean buscar(Usuario m){
+//       boolean found = false;
+//       Usuario ex = this.leerRegistro(1);
+//        do{
+//            
+//            if(ex.getUsuario().equals(m.getUsuario())&& ex.getClave().equals(m.getClave())){
+//            found =  true;
+//           }else if(this.siguiente()){
+//              ex = this.leerRegistroActual(); 
+//           }else{
+//               break;
+//           }  
+//        }while(found==false);
+//       
+//        return found;
+//       
+//    }
 }

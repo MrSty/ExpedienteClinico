@@ -1,8 +1,16 @@
 package domain;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+
+
 
 public class TCita {
     Connection cn;
@@ -24,16 +32,54 @@ public class TCita {
         }
         
     }
-    public void agregar(Cita e){
+   public void agregar(Cita e){
         try {
             rs.moveToInsertRow();
-            Date n = e.getFecha();
+            
             rs.updateString("paciente", e.getPaciente());
-            rs.updateDate("fechaCita", e.getFecha());
+            rs.updateString("fechaCita", e.getFecha());
             
             rs.insertRow();
         } catch (SQLException ex) {
             Logger.getLogger(TCita.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    } 
+   
+   public boolean siguiente(){
+        try {
+        if(rs.next()!=false){
+            return true;
+        }
+        else{
+            rs.previous();
+            return false;
+        }
+        } catch (SQLException ex) {
+                Logger.getLogger(TRegistro.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+        }
+        
+    }
+    public boolean anterior(){
+        try {
+        if(rs.previous()!=false){
+            return true;
+        }
+        else{
+            rs.next();
+            return false;
+        }
+        } catch (SQLException ex) {
+                Logger.getLogger(TRegistro.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
+        }
+    }
+    public void eliminar(){
+        try {
+            rs.deleteRow();
+            rs.next();
+        } catch (SQLException ex) {
+            Logger.getLogger(TRegistro.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

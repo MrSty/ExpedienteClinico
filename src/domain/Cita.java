@@ -1,7 +1,7 @@
 package domain;
 
 
-import java.util.Date;
+import java.sql.Date;
 
 
 
@@ -13,7 +13,7 @@ import java.util.Date;
 public class Cita {
 
         private String paciente;
-	private Date fecha;
+	private String fecha;
 
 	public Cita(){
 
@@ -31,11 +31,11 @@ public class Cita {
         this.paciente = paciente;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
         

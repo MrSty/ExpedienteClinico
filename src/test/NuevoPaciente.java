@@ -209,7 +209,7 @@ public class NuevoPaciente extends javax.swing.JFrame {
         s.setId(Integer.parseInt(this.ftfId.getText()));
         s.setEdad(Integer.parseInt(this.ftfEdad.getText()));
         s.setNumTelef(Integer.parseInt(this.ftfTelefono.getText()));
-        m.agregarRegistro(s);
+        m.agregarPaciente(s);
         
     }//GEN-LAST:event_bAgregarActionPerformed
 

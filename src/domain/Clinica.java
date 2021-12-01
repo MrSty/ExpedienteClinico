@@ -25,13 +25,53 @@ public class Clinica {
 	public void finalize() throws Throwable {
 
 	}
-	public void agregarRegistro(Paciente p){
+	public void agregarPaciente(Paciente p){
             m_Registro.crearPaciente(p);
 	}
+        public void agregarCita(Cita m){
+            this.m_Registro.cargarCita();
+            this.m_Registro.crearCita(m);
+        }
+        
+        public void crearRegistro(Registro m){
+            this.m_Registro.cargarRegistro();
+            this.m_Registro.crearRegistro(m);
+        }
+        
+        public Registro leerRegistroAct(){
+            Registro n;
+            return n = this.m_Registro.leerRegistroAct();
+        }
+        public Registro leerRegistro(){
+            Registro n;
+            this.cargarRegistro();
+            n=this.m_Registro.leerRegistro(1);
+            return n;
+        }
+        public boolean sigRegistro(){
+            boolean sig = this.m_Registro.siguienteReg();
+            return sig;
+        }
+        public boolean antRegistro(){
+            boolean ant = this.m_Registro.anteriorReg();
+            return ant;
+        }
+        
+        public void modificarRegistro(Registro m){
+            
+            this.m_Registro.modificarReg(m);
+        }
+        
+        public void eliminarRegistro(){
+            this.m_Registro.eliminarReg();
+        }
 
 	public void buscarRegistro(){
 
 	}
+        public void cargarRegistro(){
+            this.m_Registro.cargarRegistro();
+        }
         public void cargarPacientes(){
             this.m_Registro.cargarPaciente();
         }
@@ -54,9 +94,32 @@ public class Clinica {
             return ant;
         }
         
-        public boolean buscarUsuario(Usuario e) {
-          this.usu.cargarDatos();
-          return this.usu.buscar(e);
+////        public boolean buscarUsuario(Usuario e) {
+//////            int l = 1;
+//////          Usuario n = this.leerUsuario(1);
+//////          boolean f = false;
+//////          
+//////          do{
+//////          if(n.getUsuario().compareTo(e.getUsuario())==0&&n.getClave().compareTo(e.getClave())==0){
+//////              f = true;
+//////          }else if(this.sigUsuario()){
+//////              l++;
+//////              n = this.leerUsuario(l);
+//////          }else{
+//////              break;
+//////          }
+//////          }while(f==false);
+//////          return f;
+////        }
+        
+        public boolean sigUsuario(){
+            boolean sig = this.usu.siguiente();
+            return sig;
+        }
+        public Usuario leerUsuario(int i){
+            this.cargarUsuarios();
+            this.m_Usuario = this.usu.leerRegistro(i);
+            return m_Usuario;
         }
 
 	public void crearUsuario(String usuario, String clave){
@@ -69,13 +132,6 @@ public class Clinica {
             this.usu.cargarDatos();
         }
 
-	public void eliminarRegistro(){
-
-	}
-
-	public void modificarRegistro(){
-
-	}
         
         
 }//end Clinica

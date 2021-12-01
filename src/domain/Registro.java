@@ -1,6 +1,6 @@
 package domain;
 
-import java.util.Calendar;
+import javax.swing.JOptionPane;
 
 
 
@@ -12,13 +12,15 @@ import java.util.Calendar;
 public class Registro {
 
 	private String diagnostico;
-	private Calendar fecha;
 	private String tratamiento;
-	private Cita m_Cita;
+        private String pac;
+        private Cita m_Cita;
         private TPaciente mn = new TPaciente();
-        
-	public Registro(){
+        private TCita n_cita = new TCita();
+        private TRegistro m_Registro = new TRegistro();
 
+        public Registro(){
+            
 	}
 
 	public void finalize() throws Throwable {
@@ -28,10 +30,51 @@ public class Registro {
 	 * 
 	 * @param fecha
 	 */
-	public void crearCita(Calendar fecha){
-
+	public void cargarCita(){
+            this.n_cita.cargarDatos();
+        }
+        public void crearCita(Cita m){
+            this.n_cita.agregar(m);
+            JOptionPane.showMessageDialog(null, "Cita Guardada", "Nueva Cita", JOptionPane.INFORMATION_MESSAGE);
 	}
-
+        public void crearRegistro(Registro m){
+            this.m_Registro.agregar(m);
+            JOptionPane.showMessageDialog(null, "Registro Guardado", "Nuevo Registro", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        public void cargarRegistro(){
+            this.m_Registro.cargarDatos();
+        }
+        public Registro leerRegistro(int i){
+            Registro n;
+            n = this.m_Registro.leerRegistro(1);
+            return n;
+        }
+        public Registro leerRegistroAct(){
+            Registro n;
+            return n =this.m_Registro.leerRegistroActual();
+        }
+        
+        public boolean siguienteReg(){
+            boolean sig = this.m_Registro.siguiente();
+            return sig;
+        }
+        public boolean anteriorReg(){
+            boolean ant = this.m_Registro.anterior();
+            return ant;
+        }
+        
+        public void modificarReg(Registro m){
+            this.m_Registro.modificar(m);
+            JOptionPane.showMessageDialog(null, "Registro modificado", "Registro", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+        public void eliminarReg(){
+            this.m_Registro.eliminar();
+            JOptionPane.showMessageDialog(null, "Registro Eliminado", "Registro", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+            
 	public void crearPaciente(Paciente p){
             this.mn.agregar(p);
 	}
@@ -59,4 +102,30 @@ public class Registro {
 	public void modificarCita(){
 
 	}
+
+    public String getDiagnostico() {
+        return diagnostico;
+    }
+
+    public void setDiagnostico(String diagnostico) {
+        this.diagnostico = diagnostico;
+    }
+
+    public String getTratamiento() {
+        return tratamiento;
+    }
+
+    public void setTratamiento(String tratamiento) {
+        this.tratamiento = tratamiento;
+    }
+
+    public String getPac() {
+        return pac;
+    }
+
+    public void setPac(String pac) {
+        this.pac = pac;
+    }
+    
+        
 }//end Registro

@@ -223,13 +223,9 @@ public class fClinica extends javax.swing.JFrame {
     }//GEN-LAST:event_tfUsuarioActionPerformed
 
     private void bIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bIngresarMouseClicked
-//        String usuario, contra;
-//        
-//        usuario = this.tfUsuario.getText();
-//        contra = this.pClave.getText();
 //        us = new Usuario();
-//        this.us.setUsuario(usuario);
-//        this.us.setClave(contra);
+//        this.us.setUsuario(this.tfUsuario.getText());
+//        this.us.setClave(this.pClave.getText());
 //        
 //        if(cln.buscarUsuario(us)){
 //            JOptionPane.showMessageDialog(null, "Correct");
